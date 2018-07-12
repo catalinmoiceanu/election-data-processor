@@ -25,6 +25,16 @@ class PartFactory
     }
 
     /**
+     * @param int $urbanVotes
+     * @param int $ruralVotes
+     * @return Part\MediumResult
+     */
+    public function createPrecinctMediumResult(int $urbanVotes, int $ruralVotes)
+    {
+        return new Part\MediumResult($urbanVotes, $ruralVotes);
+    }
+
+    /**
      * @param int $permanent
      * @param int $additional
      * @param int $mobile

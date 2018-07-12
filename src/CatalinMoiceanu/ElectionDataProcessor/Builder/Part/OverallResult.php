@@ -30,7 +30,8 @@ class OverallResult implements ResultInterface
         return [
             'r' => $this->registered,
             't' => $this->total,
-            'p' => $this->presence
+            'p' => $this->presence,
+            'ab' => max($this->registered - $this->total, 0)
         ];
     }
 }

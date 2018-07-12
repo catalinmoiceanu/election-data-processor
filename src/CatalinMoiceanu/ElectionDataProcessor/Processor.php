@@ -100,6 +100,7 @@ class Processor
         $result = new Result($this->mapper, $this->partFactory);
         $part->addResult($result->getOverallResult([ $line ]));
         $part->addResult($result->getListTypeResult([ $line ]));
+        $part->addResult($result->getMediumResult([ $line ]));
         foreach ($result->getGroupResult([ $line ]) as $group) {
             $part->addResult($group);
         }

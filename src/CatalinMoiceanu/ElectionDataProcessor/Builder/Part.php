@@ -114,7 +114,7 @@ class Part
                             $results[$key][$k] += $v;
                         }
                     } else {
-                        $results[$key] = $partResults[$key];
+                        $results[$key] += $partResults[$key];
                     }
                 }
             }

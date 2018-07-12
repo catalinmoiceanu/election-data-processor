@@ -31,7 +31,7 @@ class GroupResult implements ResultInterface
     public function toArray(): array
     {
         return [
-            $this->gender => $this->data
+            $this->gender => array_merge($this->data, ['t' => array_sum($this->data)])
         ];
     }
 }

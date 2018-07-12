@@ -5,6 +5,7 @@ namespace CatalinMoiceanu\ElectionDataProcessor\Processor;
 use CatalinMoiceanu\ElectionDataProcessor\Mapper;
 use CatalinMoiceanu\ElectionDataProcessor\Builder\PartFactory;
 use CatalinMoiceanu\ElectionDataProcessor\Builder\Part\OverallResult;
+use CatalinMoiceanu\ElectionDataProcessor\Builder\Part\MediumResult;
 use CatalinMoiceanu\ElectionDataProcessor\Builder\Part\ListTypeResult;
 use CatalinMoiceanu\ElectionDataProcessor\Builder\Part\GroupResult;
 
@@ -57,6 +58,23 @@ class Result
             $mobile += $this->mapper->getMobileListsVotes($line);
         }
         return $this->partFactory->createPrecinctListTypeResult($permanent, $additional, $mobile);
+    }
+
+    /**
+     * @param array $lines
+     * @return MediumResult
+     */
+    public function getMediumResult(array $lines) : MediumResult
+    {
+        $urbanVotes = 0;
+        $ruralVotes = 0;
+        foreach ($lines as $line) {
+            $medium = $this->mapper->getMedium($line);
+            $votes = $this->mapper->getVotes($line);
+            $urbanVotes += $medium == 'U' ? $votes : 0;
+            $ruralVotes += $medium == 'R' ? $votes : 0;
+        }
+        return $this->partFactory->createPrecinctMediumResult($urbanVotes, $ruralVotes);
     }
 
     /**
